@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Julien M. Soriano | Virtual Assistant &amp; Support Professional</title>
 <meta name="description" content="Virtual assistant and support professional with 2+ years of healthcare BPO experience, administrative strengths, and practical creative and technical skills.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -747,6 +748,35 @@ button, a { -webkit-tap-highlight-color:transparent; }
 @media (max-width:480px) {
   .experience-card { padding:20px; }
   .experience-card-primary { padding-left:14px; }
+}
+
+/* EDUCATION — Compact academic background */
+.education-section {
+  padding:72px 0;
+  border-top:1px solid var(--border);
+}
+.education-layout {
+  display:grid; grid-template-columns:.75fr 1.25fr; gap:48px; align-items:center;
+}
+.education-layout h2 { margin-top:14px; max-width:420px; }
+.education-card {
+  display:flex; justify-content:space-between; gap:28px;
+  padding:30px 32px; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow-sm);
+}
+.education-card h3 { margin:0 0 7px; font-size:1.12rem; line-height:1.4; }
+.education-school { color:var(--accent); font-weight:700; margin-bottom:10px; }
+.education-card p { margin:0; color:var(--body-light); line-height:1.7; }
+.education-period {
+  flex:0 0 auto; color:var(--body-light); font-size:.9rem; font-weight:700; white-space:nowrap;
+}
+@media (max-width:760px) {
+  .education-section { padding:56px 0; }
+  .education-layout { grid-template-columns:1fr; gap:28px; }
+}
+@media (max-width:520px) {
+  .education-card { flex-direction:column; gap:16px; padding:24px 22px; }
+  .education-period { order:-1; }
 }
 
 /* SKILLS — Editorial grouped layout */
@@ -1676,6 +1706,26 @@ provider concerns.</li>
   </div>
 </section>
 
+<!-- EDUCATION -->
+<section class="education-section" id="education">
+  <div class="wrap">
+    <div class="education-layout">
+      <div>
+        <span class="eyebrow">Education</span>
+        <h2>Information technology studies.</h2>
+      </div>
+      <article class="education-card reveal">
+        <div>
+          <h3>Bachelor of Science in Information Technology</h3>
+          <div class="education-school">Our Lady of Fatima University</div>
+          <p>Completed 2 years of undergraduate study in Information Technology, with foundational coursework in digital systems and software use.</p>
+        </div>
+        <div class="education-period">2021–2023</div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS & SYSTEMS -->
 <section class="skills-section section-alt" id="skills">
   <div class="wrap">
@@ -1883,3 +1933,4 @@ provider concerns.</li>
 
 </body>
 </html>
+
