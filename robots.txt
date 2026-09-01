@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jlnsrn.github.io/sitemap.xml
