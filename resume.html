@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Download Resume | Julien M. Soriano</title>
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;min-height:100vh;margin:0;display:grid;place-items:center;background:#F7F7F4;color:#182033}
+main{width:min(560px,calc(100% - 40px));text-align:center}
+h1{margin-bottom:12px}p{color:#5a6373;line-height:1.6}
+button,a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 22px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+button{border:0;background:#182033;color:#fff}a{margin-left:8px;border:1px solid #C2CDC8;color:#182033;text-decoration:none}
+#status{margin-top:18px;font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Julien M. Soriano — Resume</h1>
+<p>Your PDF download should begin automatically. If it does not, use the button below.</p>
+<button id="downloadBtn" type="button">Download resume PDF</button>
+<a href="./">Back to portfolio</a>
+<p id="status" role="status" aria-live="polite"></p>
+</main>
+<script>
+(function(){
+  'use strict';
+  var parts = [
+    'assets/resume/part-01.txt',
+    'assets/resume/part-02.txt',
+    'assets/resume/part-03.txt',
+    'assets/resume/part-04.txt',
+    'assets/resume/part-05.txt'
+  ];
+  var status = document.getElementById('status');
+  var button = document.getElementById('downloadBtn');
+  var cachedUrl = null;
+
+  async function buildResumeUrl() {
+    if (cachedUrl) return cachedUrl;
+    status.textContent = 'Preparing resume…';
+    var texts = await Promise.all(parts.map(function(path) {
+      return fetch(path).then(function(response) {
+        if (!response.ok) throw new Error('Could not load resume data.');
+        return response.text();
+      });
+    }));
+    var base64 = texts.join('').replace(/\s+/g, '');
+    var binary = atob(base64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    cachedUrl = URL.createObjectURL(new Blob([bytes], {type:'application/pdf'}));
+    status.textContent = '';
+    return cachedUrl;
+  }
+
+  async function downloadResume() {
+    try {
+      var url = await buildResumeUrl();
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'Julien_Soriano_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      status.textContent = 'Resume ready.';
+    } catch (error) {
+      status.textContent = 'The resume could not be prepared. Please try again.';
+    }
+  }
+
+  button.addEventListener('click', downloadResume);
+  window.addEventListener('load', downloadResume, {once:true});
+})();
+</script>
+</body>
+</html>
